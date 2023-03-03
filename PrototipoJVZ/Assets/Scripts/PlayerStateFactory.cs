@@ -25,5 +25,9 @@ public class PlayerStateFactory
     public PlayerBaseState InAirIdle(){
         return new PlayerInAirIdleState(_context, this);
     }
+
+    public PlayerBaseState GroundedJump() {
+        return new PlayerGroundedJumpState(_context, this);
+    }
     
 }

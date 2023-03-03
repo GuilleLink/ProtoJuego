@@ -12,6 +12,7 @@ public class PlayerGroundedIdleState : PlayerBaseState
     }
     public override void EnterState(){
         Ctx.PlayerInputActions.PlayerTest.Dash.performed += Dash;
+        Ctx.PlayerInputActions.PlayerTest.Jump.performed += Jump;
     }
 
     public override void UpdateState(){
@@ -24,6 +25,7 @@ public class PlayerGroundedIdleState : PlayerBaseState
 
     public override void ExitState(){
         Ctx.PlayerInputActions.PlayerTest.Dash.performed -= Dash;
+        Ctx.PlayerInputActions.PlayerTest.Jump.performed -= Jump;
     }
 
     public override void CheckSwitchStates(){
@@ -59,6 +61,12 @@ public class PlayerGroundedIdleState : PlayerBaseState
         if (Ctx.Rb.velocity.x > (Ctx.MaxSpeed) || Ctx.Rb.velocity.x < (- Ctx.MaxSpeed)){
             Ctx.Rb.AddForce(- Ctx.Rb.velocity, ForceMode.Acceleration);
         }
+    }
+
+    public void Jump(InputAction.CallbackContext context) {
+        if (MoveValue.magnitude != 0){
+            SwitchState(Factory.GroundedJump());
+        }    
     }
 
     public void Dash(InputAction.CallbackContext context){
