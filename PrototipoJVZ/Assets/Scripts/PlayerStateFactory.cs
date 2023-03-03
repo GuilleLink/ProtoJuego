@@ -1,4 +1,4 @@
-
+using UnityEngine;
 public class PlayerStateFactory 
 {
     private PlayerStateContext _context;
@@ -12,6 +12,10 @@ public class PlayerStateFactory
     
     public PlayerBaseState GroundedIdle(){
         return new PlayerGroundedIdleState(_context, this);
+    }
+
+    public PlayerBaseState GroundedDash(Vector3 direction){
+        return new PlayerGroundedDashState(_context, this, direction);
     }
 
     public PlayerBaseState InAir(){

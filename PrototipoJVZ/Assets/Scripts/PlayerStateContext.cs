@@ -25,7 +25,7 @@ public class PlayerStateContext : MonoBehaviour
     [SerializeField]
     private float _drag = 1.0f;
     [SerializeField]
-    private float _dashSpeed = 20f;
+    private float _dashSpeed = 5f;
     private float _velocityTimer = 0f;
     private float _velocityDirection = 1f;
     private float _velocity = 0f;
@@ -36,6 +36,8 @@ public class PlayerStateContext : MonoBehaviour
     public float MaxSpeed {get {return _maxSpeed;} set {_maxSpeed = value;}}
     public float Drag {get {return _drag;} set {_drag = value;}}
     public float DashSpeed {get {return _dashSpeed;} set {_dashSpeed = value;}}
+    public Renderer Render;
+    public Color OriginalColor;
     
     void Awake() {
         //setup state
@@ -46,6 +48,8 @@ public class PlayerStateContext : MonoBehaviour
         _currentState.EnterState();
         //PlayerInputActions.PlayerTest.Move.performed += move;
         PlayerInputActions.PlayerTest.Enable();
+        Render = this.GetComponent<Renderer>();
+        OriginalColor = Render.material.color;
     }
     
     void Start()

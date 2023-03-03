@@ -11,7 +11,7 @@ public class PlayerGroundedIdleState : PlayerBaseState
         IsRootState = false;
     }
     public override void EnterState(){
-        Ctx.PlayerInputActions.PlayerTest.Dash.performed += DashV2;
+        Ctx.PlayerInputActions.PlayerTest.Dash.performed += Dash;
     }
 
     public override void UpdateState(){
@@ -22,7 +22,9 @@ public class PlayerGroundedIdleState : PlayerBaseState
         MoveV2();
     }
 
-    public override void ExitState(){}
+    public override void ExitState(){
+        Ctx.PlayerInputActions.PlayerTest.Dash.performed -= Dash;
+    }
 
     public override void CheckSwitchStates(){
         /*
@@ -57,6 +59,12 @@ public class PlayerGroundedIdleState : PlayerBaseState
         if (Ctx.Rb.velocity.x > (Ctx.MaxSpeed) || Ctx.Rb.velocity.x < (- Ctx.MaxSpeed)){
             Ctx.Rb.AddForce(- Ctx.Rb.velocity, ForceMode.Acceleration);
         }
+    }
+
+    public void Dash(InputAction.CallbackContext context){
+        if (MoveValue.magnitude != 0){
+            SwitchState(Factory.GroundedDash(new Vector3(MoveValue.x, MoveValue.y, 0)));
+        }    
     }
 
     public void DashV2(InputAction.CallbackContext context){

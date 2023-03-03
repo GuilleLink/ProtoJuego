@@ -609,9 +609,10 @@ MonoBehaviour:
   _speed: 30
   _maxSpeed: 5
   _drag: 1
-  _dashSpeed: 20
+  _dashSpeed: 5
   Rb: {fileID: 0}
-  MoveValue: {x: 0, y: 0}
+  Render: {fileID: 0}
+  OriginalColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!54 &1601090612
 Rigidbody:
   m_ObjectHideFlags: 0
